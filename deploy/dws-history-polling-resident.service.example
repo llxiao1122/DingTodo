@@ -1,0 +1,16 @@
+[Unit]
+Description=Resident 15-minute configured-group DWS history poller (example only)
+
+[Service]
+Type=simple
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin
+Environment=DWS_PARITY_STATE_DIR=%h/.local/state/dws-event-history-parity
+ExecStart=/usr/bin/python3 @PROJECT_DIR@/polling_resident.py --state-dir %h/.local/state/dws-history-listener --interval-seconds 900 --mode production --write-ledger --allow-external-writes --jev-v2-policy --semantic-fallback --title-fields --date-role-fallback --supervised-rollout --not-before 2026-10-08T00:00:00+08:00
+Restart=on-failure
+RestartSec=30
+KillMode=mixed
+TimeoutStopSec=60
+SendSIGKILL=no
+UMask=0077
+StandardOutput=journal
+StandardError=journal

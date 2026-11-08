@@ -1,0 +1,21 @@
+[Unit]
+Description=Opt-in Dingtalk unified event consumer candidate
+ConditionPathExists=%h/.config/dws/unified-event-consumer.enabled
+StartLimitIntervalSec=3600
+StartLimitBurst=3
+
+[Service]
+Type=simple
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin
+ExecStart=/usr/bin/python3 @PROJECT_DIR@/listener_engine.py --state-dir %h/.local/state/dws-history-listener --enable-todo-events --mode production --write-ledger --allow-external-writes --jev-v2-policy --semantic-fallback --title-fields --date-role-fallback --supervised-rollout --not-before 2026-10-08T00:00:00+08:00
+Restart=on-failure
+RestartSec=30
+KillMode=mixed
+TimeoutStopSec=60
+SendSIGKILL=no
+UMask=0077
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

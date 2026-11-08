@@ -1,0 +1,9 @@
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.env
+.env.*
+*.sqlite*
+*.db
+*.log
+.ding_todo_skill_before_self_assignment

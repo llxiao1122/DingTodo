@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily 17:30 DWS history recovery
+
+[Timer]
+OnCalendar=*-*-* 17:30:00 Asia/Shanghai
+AccuracySec=1s
+Persistent=true
+Unit=dws-history-recovery.service
+
+[Install]
+WantedBy=timers.target

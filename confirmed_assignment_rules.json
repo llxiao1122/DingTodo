@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "contract_version": "confirmed-assignment-habits/2026-10-18.1",
+  "source": "rule-driven-task-routing/references/confirmed-assignment-habits.md",
+  "members": ["李林骁", "陈红洁", "张志斌", "杨梦卓", "苗笑天", "谭继衡"],
+  "monthly_anchors": {
+    "2026-10": {
+      "杂品库": "苗笑天",
+      "中小件区": "杨梦卓",
+      "材料棚及办公用房": "张志斌",
+      "大件库区": "谭继衡"
+    }
+  },
+  "rules": {
+    "A": {
+      "module": "publicity_fire_feedback",
+      "patterns": [{"all": ["宣传简报"]}, {"all": ["消防活动", "组织", "反馈"]}, {"all": ["四德教育", "学习简报"]}, {"all": ["消防三问", "组织", "反馈"]}],
+      "primary_owner": "陈红洁",
+      "collaborators": ["李林骁"]
+    },
+    "B": {
+      "module": "scrap",
+      "patterns": [{"all": ["废旧物资"]}, {"all": ["废旧", "称重"]}, {"all": ["废旧", "拍照"]}, {"all": ["废旧", "踏勘"]}, {"all": ["废旧", "分隔"]}],
+      "dynamic_area": "材料棚及办公用房",
+      "collaborators": ["李林骁"]
+    },
+    "C": {
+      "module": "demand_plan_data_check",
+      "patterns": [{"all": ["需求计划"]}, {"all": ["需求", "数据核对"]}],
+      "primary_owner": "苗笑天",
+      "collaborators": ["李林骁"]
+    },
+    "D": {
+      "module": "workgroup_awareness",
+      "patterns": [{"all": ["知晓"]}, {"all": ["知悉"]}],
+      "notice_terms": ["通知", "传达", "知会", "通报"],
+      "requires_local_scope": true,
+      "awareness_names": ["李林骁", "陈红洁", "张志斌", "杨梦卓", "苗笑天", "谭继衡"]
+    },
+    "E": {
+      "module": "special_temporary_field_work",
+      "patterns": [{"all": ["专项", "现场"]}, {"all": ["跨库区", "整理"]}, {"all": ["货位物资整理"]}, {"all": ["货架", "标签", "粘贴", "清理"]}],
+      "manual_assignment_required": true
+    },
+    "F": {
+      "module": "hazardous_waste",
+      "patterns": [{"all": ["危废"]}, {"all": ["危险废弃物"]}, {"all": ["危险废物"]}, {"all": ["废铅蓄电池", "处置"]}],
+      "dynamic_area": "杂品库",
+      "collaborators": ["李林骁"]
+    },
+    "G": {
+      "module": "monthly_inventory",
+      "patterns": [{"all": ["每月盘点"]}, {"all": ["月度盘点"]}, {"all": ["总库全盘"]}],
+      "manual_assignment_required": true
+    }
+  }
+}

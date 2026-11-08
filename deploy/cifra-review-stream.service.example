@@ -1,0 +1,27 @@
+[Unit]
+Description=Cifra DingTalk Stream review consumer
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=@RELEASE_CODE@
+Environment=PYTHONUNBUFFERED=1
+Environment=DINGTODO_ASSIGN_SELF_ONLY=1
+Environment="DINGTODO_REVIEW_APP_ID=@APP_ID@"
+Environment="HERMES_POLARDB_RUNTIME=@RELEASE_RUNTIME@"
+ExecStart=@PYTHON@ @RELEASE_CODE@/review_stream_worker.py --db /root/.hermes/dingtalk-listener-state/review-inbox.sqlite3 --profile @CIFRA_PROFILE@ --bot-open-id @CIFRA_BOT_OPEN_ID@ --app-id @APP_ID@ --credentials-file /root/.hermes/dingtalk-listener-state/cifra-stream-credentials.json
+Restart=on-failure
+RestartSec=30
+KillSignal=SIGTERM
+KillMode=mixed
+TimeoutStopSec=180
+UMask=0077
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

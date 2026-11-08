@@ -1,0 +1,17 @@
+[Unit]
+Description=Configured-group DWS history listener
+StartLimitIntervalSec=3600
+StartLimitBurst=3
+
+[Service]
+Type=simple
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin
+ExecStart=/usr/bin/python3 @PROJECT_DIR@/listener_engine.py --state-dir %h/.local/state/dws-history-listener --mode production --write-ledger --allow-external-writes @CURRENT_MODEL_FLAGS@ @CURRENT_NOT_BEFORE_ARGS@
+Restart=on-failure
+RestartSec=30
+KillMode=mixed
+TimeoutStopSec=60
+SendSIGKILL=no
+UMask=0077
+StandardOutput=journal
+StandardError=journal

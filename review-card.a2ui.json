@@ -1,0 +1,223 @@
+[
+  {
+    "version": "v1.0",
+    "createSurface": {
+      "surfaceId": "review-card",
+      "catalogId": "https://dingtalk.com/card/a2ui/catalogs/public/catalog.json"
+    }
+  },
+  {
+    "version": "v1.0",
+    "updateDataModel": {
+      "surfaceId": "review-card",
+      "path": "/",
+      "value": {
+        "review": {
+          "items": [
+            {
+              "summary": "[redacted example summary]",
+              "sourceGroup": "来源群",
+              "sourceSender": "[example sender]",
+              "sourceTime": "来源消息时间",
+              "sourceMessageId": "[example message id]",
+              "actionIds": {
+                "create": "review:create:1",
+                "ignore": "review:ignore:1",
+                "clarify": "review:clarify:1"
+              },
+              "actionParams": {
+                "create": {
+                  "ordinal": 1,
+                  "decision": "create"
+                },
+                "ignore": {
+                  "ordinal": 1,
+                  "decision": "ignore"
+                },
+                "clarify": {
+                  "ordinal": 1,
+                  "decision": "clarify"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "version": "v1.0",
+    "updateComponents": {
+      "surfaceId": "review-card",
+      "components": [
+        {
+          "id": "root",
+          "component": "Column",
+          "children": [
+            "title",
+            "instructions",
+            "review-items"
+          ]
+        },
+        {
+          "id": "title",
+          "component": "Text",
+          "text": "待办复核"
+        },
+        {
+          "id": "instructions",
+          "component": "Text",
+          "text": "[redacted example summary]"
+        },
+        {
+          "id": "review-items",
+          "component": "List",
+          "direction": "vertical",
+          "children": {
+            "componentId": "review-item",
+            "path": "/review/items"
+          }
+        },
+        {
+          "id": "review-item",
+          "component": "Column",
+          "children": [
+            "summary-heading",
+            "summary-text",
+            "source-heading",
+            "source-group",
+            "source-sender",
+            "source-time",
+            "source-message-id",
+            "create-button",
+            "ignore-button",
+            "clarify-button"
+          ]
+        },
+        {
+          "id": "summary-heading",
+          "component": "Text",
+          "text": "来源摘要",
+          "bold": true
+        },
+        {
+          "id": "summary-text",
+          "component": "Text",
+          "text": {
+            "path": "summary"
+          },
+          "maxLine": 8
+        },
+        {
+          "id": "source-heading",
+          "component": "Text",
+          "text": "来源信息",
+          "bold": true
+        },
+        {
+          "id": "source-group",
+          "component": "Text",
+          "text": {
+            "path": "sourceGroup"
+          },
+          "variant": "caption"
+        },
+        {
+          "id": "source-sender",
+          "component": "Text",
+          "text": {
+            "path": "sourceSender"
+          },
+          "variant": "caption"
+        },
+        {
+          "id": "source-time",
+          "component": "Text",
+          "text": {
+            "path": "sourceTime"
+          },
+          "variant": "caption"
+        },
+        {
+          "id": "source-message-id",
+          "component": "Text",
+          "text": {
+            "path": "sourceMessageId"
+          },
+          "variant": "caption",
+          "maxLine": 1
+        },
+        {
+          "id": "create-button",
+          "component": "Button",
+          "child": "create-label",
+          "variant": "primary",
+          "action": {
+            "event": {
+              "name": "review.create",
+              "context": {
+                "actionId": {
+                  "path": "actionIds.create"
+                },
+                "params": {
+                  "path": "actionParams.create"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "create-label",
+          "component": "Text",
+          "text": "创建"
+        },
+        {
+          "id": "ignore-button",
+          "component": "Button",
+          "child": "ignore-label",
+          "action": {
+            "event": {
+              "name": "review.ignore",
+              "context": {
+                "actionId": {
+                  "path": "actionIds.ignore"
+                },
+                "params": {
+                  "path": "actionParams.ignore"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "ignore-label",
+          "component": "Text",
+          "text": "忽略"
+        },
+        {
+          "id": "clarify-button",
+          "component": "Button",
+          "child": "clarify-label",
+          "action": {
+            "event": {
+              "name": "review.clarify",
+              "context": {
+                "actionId": {
+                  "path": "actionIds.clarify"
+                },
+                "params": {
+                  "path": "actionParams.clarify"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "clarify-label",
+          "component": "Text",
+          "text": "需要澄清"
+        }
+      ]
+    }
+  }
+]
